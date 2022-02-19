@@ -1,7 +1,9 @@
 import { TarefasService } from './../services/tarefas.service';
 import { Component, OnInit } from '@angular/core';
 import { Tarefa } from '../model/tarefa';
-import { Observable } from 'rxjs';
+import { catchError, Observable, of } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { ErrorDialogComponent } from 'src/app/shared/components/error-dialog/error-dialog.component';
 
 @Component({
   selector: 'app-tarefas',
@@ -10,13 +12,28 @@ import { Observable } from 'rxjs';
 })
 export class TarefasComponent implements OnInit {
 
-  tarefas: Observable<Tarefa[]>;
+  tarefas$: Observable<Tarefa[]>;
 
   displayedColumns = ['id', 'titulo'];
 
-  constructor(private tarefaService: TarefasService) {
-    this.tarefas = this.tarefaService.list();
+  constructor(
+    private tarefaService: TarefasService,
+    public dialog: MatDialog
+    ) {
+    this.tarefas$ = this.tarefaService.list()
+    .pipe(
+      catchError(err => {
+        this.onError('Erro ao carregar cursos.');
+        return of([]);
+      })
+    );
 
+  }
+
+  onError(errorMsg: string) {
+    this.dialog.open(ErrorDialogComponent, {
+      data: errorMsg,
+    });
   }
 
   ngOnInit(): void {
