@@ -1,0 +1,55 @@
+<h1 mat-dialog-title>Adicionar Tarefa Formulario</h1>
+<div mat-dialog-content>
+  <form [formGroup]="tarefaForm">
+    <mat-form-field appearance="outline">
+      <mat-label>Titulo</mat-label>
+      <input formControlName="titulo" matInput placeholder="Digite o titulo..." />
+    </mat-form-field>
+    <p>
+      <mat-form-field class="example-full-width" appearance="outline">
+        <mat-label>Descrição</mat-label>
+        <textarea
+          matInput
+          formControlName="descricao"
+          placeholder="Ex. realizar testes da aplicação"
+        ></textarea>
+      </mat-form-field>
+    </p>
+    <mat-form-field appearance="outline">
+      <mat-label>Prioridade</mat-label>
+      <mat-select formControlName="prioridade" placeholder="Selecione a prioridade">
+        <mat-option value="BAIXA">Baixa</mat-option>
+        <mat-option value="MEDIA">Média</mat-option>
+        <mat-option value="ALTA">Alta</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Status</mat-label>
+      <mat-select formControlName="status" placeholder="Selecione o status...">
+        <mat-option value="EM_ANDAMENTO">Pendente</mat-option>
+        <mat-option value="CONCLUIDA">Concluido</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Responsavel</mat-label>
+      <mat-select formControlName="responsavel" placeholder="Selecione o responsavel..."
+      [errorStateMatcher]="errorStateMatcher" [compareWith]="compareFn">
+        <mat-option
+          *ngFor="let usuario of usuarios$ | async"
+          [value]="usuario"
+        >
+          {{ usuario.nome }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+</div>
+
+<div>
+  <div mat-dialog-action [align]="'end'">
+    <button mat-stroked-button mat-dialog-close>Cancelar</button>
+    <button style="margin-left: 8px" mat-raised-button color="primary" (click)="addTarefa()">
+      {{actionBtn}}
+    </button>
+  </div>
+</div>

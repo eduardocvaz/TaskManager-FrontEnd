@@ -1,6 +1,10 @@
-import { AppMaterialModule } from './app-material/app-material.module';
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+
+import { AppMaterialModule } from './app-material/app-material.module';
 import { ErrorDialogComponent } from './components/error-dialog/error-dialog.component';
 
 
@@ -11,8 +15,13 @@ import { ErrorDialogComponent } from './components/error-dialog/error-dialog.com
   ],
   imports: [
     AppMaterialModule,
-    CommonModule
+    CommonModule,
+    MatFormFieldModule
   ],
-  exports: [ErrorDialogComponent]
+  exports: [ErrorDialogComponent,
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule
+  ]
 })
 export class SharedModule { }

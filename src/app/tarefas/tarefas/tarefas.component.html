@@ -1,7 +1,20 @@
+
+
 <mat-card>
+  <mat-toolbar color="primary" >Filtros</mat-toolbar>
+  <mat-form-field appearance="standard">
+    <mat-label>Filtrar por titulo</mat-label>
+    <input
+      matInput
+      (keyup)="applyFilter($event)"
+      placeholder="Ex. ium"
+      #input
+    />
+  </mat-form-field>
+
   <mat-toolbar color="primary">Tarefas</mat-toolbar>
   <div *ngIf="tarefas$ | async as tarefas; else loading">
-    <table mat-table [dataSource]="tarefas" class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
       <!-- Position Column -->
       <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef>Numero</th>
@@ -14,10 +27,39 @@
         <td mat-cell *matCellDef="let tarefa">{{ tarefa.titulo }}</td>
       </ng-container>
 
-      <!-- Symbol Column -->
-      <ng-container matColumnDef="symbol">
-        <th mat-header-cell *matHeaderCellDef>Symbol</th>
-        <td mat-cell *matCellDef="let element">{{ element.symbol }}</td>
+      <!-- Responsavel Column -->
+      <ng-container matColumnDef="responsavel">
+        <th mat-header-cell *matHeaderCellDef>Responsavel</th>
+        <td mat-cell *matCellDef="let tarefa">{{ tarefa.responsavel.nome }}</td>
+      </ng-container>
+
+      <!-- Prioridade Column -->
+      <ng-container matColumnDef="prioridade">
+        <th mat-header-cell *matHeaderCellDef>Prioridade</th>
+        <td mat-cell *matCellDef="let tarefa">{{ tarefa.prioridade }}</td>
+      </ng-container>
+
+      <!-- Status Column -->
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef>Status</th>
+        <td mat-cell *matCellDef="let tarefa">{{ tarefa.status }}</td>
+      </ng-container>
+
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Actions</th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-icon-button (click)="editTarefa(element)" color="primary">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button (click)="deleteTarefa(element.id)" color="warn">
+            <mat-icon>delete</mat-icon>
+          </button>
+          <button mat-icon-button (click)="checkTarefa(element.id)" color="accent">
+            <mat-icon>done</mat-icon>
+          </button>
+        </td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

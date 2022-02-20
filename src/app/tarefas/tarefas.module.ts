@@ -8,6 +8,7 @@ import { TarefasComponent } from './tarefas/tarefas.component';
 
 
 
+
 @NgModule({
   declarations: [
     TarefasComponent
