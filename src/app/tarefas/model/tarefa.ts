@@ -20,6 +20,8 @@ export interface Tarefa {
   // Responsável
   responsavel: Usuario;
 
+  deadLine: Date;
+
 
 
 

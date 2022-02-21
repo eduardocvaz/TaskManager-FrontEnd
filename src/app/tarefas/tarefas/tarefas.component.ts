@@ -23,7 +23,7 @@ export class TarefasComponent implements OnInit {
   myTarefas: Tarefa[] = [];
 
 
-  displayedColumns = ['id', 'titulo','responsavel','prioridade','status', 'actions'];
+  displayedColumns = ['id', 'titulo','responsavel','prioridade','status','deadline', 'actions'];
 
 
   constructor(

@@ -56,7 +56,7 @@ export class AddDialogComponent implements OnInit {
               this.tarefaForm.reset();
               this.tarefasComponent.updateTable();
             this.dialogRef.close();
-            
+
           },
           error: (err) => {
             this._snackBar.open('Erro ao adicionar tarefa.', 'OK'),
@@ -100,6 +100,7 @@ export class AddDialogComponent implements OnInit {
       prioridade: ['', Validators.required],
       status: ['', Validators.required],
       responsavel: ['', Validators.required],
+      deadline: ['', Validators.required],
     });
     if (this.ediData) {
       this.actionBtn = 'Editar';
@@ -111,6 +112,8 @@ export class AddDialogComponent implements OnInit {
       this.tarefaForm.controls['responsavel'].setValue(
         this.ediData.responsavel
       );
+      this.tarefaForm.controls['deadline'].setValue(this.ediData.deadline);
+
 
     }
   }

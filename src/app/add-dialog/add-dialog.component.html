@@ -42,6 +42,13 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>DeadLine*</mat-label>
+      <input formControlName="deadline" matInput [matDatepicker]="picker">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker  #picker></mat-datepicker>
+    </mat-form-field>
+
   </form>
 </div>
 

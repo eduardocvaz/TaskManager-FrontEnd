@@ -17,7 +17,7 @@ export class AppComponent {
       width: '30%'
     });
     this.dialog.afterAllClosed.subscribe(() => {
-      this.constructor();
+      window.location.reload();
     });
   }
 }
